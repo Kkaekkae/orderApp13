@@ -10,11 +10,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Set Swap Space
-        uses: pierotofy/set-swap-space@master
-        with:
-          swap-size-gb: 10
-
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -36,13 +31,13 @@ jobs:
 
       - name: 환경변수 설정
         run: echo "${{ secrets.MY_APPLICATION_PROPERTIES}}" > ./src/main/resources/application.properties
-        working-directory: /home/runner/work/orderApp13/orderApp13
+        working-directory: /
 
       - name: application.properties 내용 출력
         run: |
           echo "application.properties 내용:"
           cat ./src/main/resources/application.properties
-        working-directory: /home/runner/work/orderApp13/orderApp13
+        working-directory: /
 
       - name: gradlew bootJar
         run: ./gradlew bootJar -Dorg.gradle.jvmargs="-Xms64m -Xmx256m"
